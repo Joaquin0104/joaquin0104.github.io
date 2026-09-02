@@ -1,0 +1,599 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --azul:#1801F5;
+    --magenta:#FE0B8F;
+    --naranja:#F64C1A;
+    --morado:#21004D;
+    --negro:#000000;
+    --blanco:#FFFFFF;
+    --gris:#F2F2F2;
+    --gris2:#888;
+  }
+  body{font-family:'Nunito Sans',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden}
+
+  /* ── NAV ── */
+  nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.2rem 3rem;position:sticky;top:0;background:var(--negro);z-index:100;
+  }
+  .logo-text{
+    font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;
+    letter-spacing:-0.02em;color:var(--blanco);
+  }
+  .logo-text span{
+    background:linear-gradient(135deg,var(--naranja),var(--magenta),var(--azul));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .logo-sub{font-size:0.55rem;letter-spacing:0.18em;color:rgba(255,255,255,0.4);display:block;margin-top:-4px;font-family:'Nunito Sans',sans-serif;font-weight:300}
+  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+  .nav-links a{text-decoration:none;color:rgba(255,255,255,0.55);font-size:0.85rem;font-weight:400;transition:color 0.2s}
+  .nav-links a:hover{color:var(--blanco)}
+  .nav-cta{
+    background:linear-gradient(135deg,var(--naranja),var(--magenta));
+    color:var(--blanco)!important;padding:0.55rem 1.4rem;border-radius:100px;
+    font-size:0.83rem!important;font-weight:700!important;transition:opacity 0.2s!important;
+  }
+  .nav-cta:hover{opacity:0.85!important}
+
+  /* ── HERO ── */
+  .hero{
+    background:var(--negro);padding:0;
+    display:grid;grid-template-columns:1fr 1fr;min-height:92vh;
+  }
+  .hero-left{
+    padding:5rem 3rem 5rem 4rem;display:flex;flex-direction:column;justify-content:center;
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+    border-radius:100px;padding:0.35rem 1rem;margin-bottom:2rem;
+    font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);
+    width:fit-content;
+  }
+  .hero-eyebrow::before{
+    content:'';width:6px;height:6px;border-radius:50%;
+    background:linear-gradient(135deg,var(--naranja),var(--magenta));
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+  .hero h1{
+    font-family:'Nunito',sans-serif;font-weight:900;
+    font-size:clamp(2.6rem,4.5vw,4rem);line-height:1.02;letter-spacing:-0.03em;
+    color:var(--blanco);margin-bottom:1.5rem;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(90deg,var(--naranja),var(--magenta),var(--azul));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .hero-tagline{
+    font-size:0.95rem;color:rgba(255,255,255,0.45);font-weight:300;
+    line-height:1.75;max-width:460px;margin-bottom:3rem;
+    border-left:2px solid;
+    border-image:linear-gradient(180deg,var(--naranja),var(--magenta)) 1;
+    padding-left:1rem;
+  }
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-grad{
+    background:linear-gradient(135deg,var(--naranja),var(--magenta));
+    color:var(--blanco);padding:0.9rem 2.2rem;border-radius:100px;
+    font-weight:700;font-size:0.9rem;border:none;cursor:pointer;
+    font-family:'Nunito',sans-serif;transition:opacity 0.2s,transform 0.2s;
+    letter-spacing:0.01em;
+  }
+  .btn-grad:hover{opacity:0.88;transform:translateY(-2px)}
+  .btn-outline{
+    background:transparent;color:rgba(255,255,255,0.7);
+    padding:0.9rem 2.2rem;border-radius:100px;font-weight:400;font-size:0.9rem;
+    border:1px solid rgba(255,255,255,0.2);cursor:pointer;font-family:'Nunito Sans',sans-serif;
+    transition:border-color 0.2s,color 0.2s;
+  }
+  .btn-outline:hover{border-color:rgba(255,255,255,0.5);color:var(--blanco)}
+
+  /* ── HERO RIGHT ── */
+  .hero-right{
+    background:linear-gradient(145deg,#21004D 0%,#0d0020 40%,#000 100%);
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:4rem 3rem;gap:1.2rem;position:relative;overflow:hidden;
+  }
+  .hero-right::before{
+    content:'';position:absolute;top:-40px;right:-40px;
+    width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(254,11,143,0.25) 0%,transparent 70%);
+  }
+  .hero-right::after{
+    content:'';position:absolute;bottom:-60px;left:-20px;
+    width:250px;height:250px;border-radius:50%;
+    background:radial-gradient(circle,rgba(24,1,245,0.3) 0%,transparent 70%);
+  }
+  .stat-card{
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+    border-radius:16px;padding:1.4rem 1.8rem;position:relative;z-index:1;
+    width:100%;transition:border-color 0.25s;
+  }
+  .stat-card:hover{border-color:rgba(254,11,143,0.4)}
+  .stat-label{font-size:0.68rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.4rem}
+  .stat-num{
+    font-family:'Nunito',sans-serif;font-weight:900;font-size:2.6rem;letter-spacing:-0.04em;line-height:1;
+    background:linear-gradient(90deg,var(--naranja),var(--magenta));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .stat-desc{font-size:0.78rem;color:rgba(255,255,255,0.35);margin-top:0.3rem;font-weight:300}
+  .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;width:100%}
+
+  /* ── TICKER ── */
+  .ticker-wrap{background:linear-gradient(90deg,var(--naranja),var(--magenta),var(--azul),var(--morado));overflow:hidden;padding:0.85rem 0}
+  .ticker{display:flex;gap:3rem;animation:tick 22s linear infinite;white-space:nowrap}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .ticker-item{font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.9);flex-shrink:0}
+  .ticker-item span{color:rgba(255,255,255,0.45);margin:0 1.5rem}
+
+  /* ── QUIÉNES SOMOS ── */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:5rem;padding:7rem 4rem;max-width:1200px;margin:0 auto;align-items:center}
+  .about-left .tag{font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--azul);margin-bottom:1rem}
+  .about-left h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-0.03em;line-height:1.08;color:var(--negro);margin-bottom:1.5rem}
+  .about-left h2 span{color:var(--magenta)}
+  .about-left p{font-size:0.95rem;color:var(--gris2);line-height:1.8;font-weight:300;margin-bottom:1rem}
+  .about-left p strong{color:var(--negro);font-weight:700}
+  .about-right{display:flex;flex-direction:column;gap:1rem}
+  .valor-card{
+    border-radius:14px;padding:1.4rem 1.6rem;
+    display:flex;align-items:flex-start;gap:1rem;
+    border:1px solid rgba(0,0,0,0.07);transition:transform 0.2s,box-shadow 0.2s;
+    cursor:default;
+  }
+  .valor-card:hover{transform:translateX(6px);box-shadow:0 8px 24px rgba(0,0,0,0.07)}
+  .valor-card:nth-child(1){background:#FFF5F2;border-color:rgba(246,76,26,0.15)}
+  .valor-card:nth-child(2){background:#FDF0F7;border-color:rgba(254,11,143,0.15)}
+  .valor-card:nth-child(3){background:#F0F1FF;border-color:rgba(24,1,245,0.15)}
+  .valor-card:nth-child(4){background:#F5F0FF;border-color:rgba(33,0,77,0.15)}
+  .valor-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+  .dot-naranja{background:var(--naranja)}
+  .dot-magenta{background:var(--magenta)}
+  .dot-azul{background:var(--azul)}
+  .dot-morado{background:var(--morado)}
+  .valor-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;color:var(--negro);margin-bottom:0.2rem}
+  .valor-desc{font-size:0.8rem;color:var(--gris2);font-weight:300;line-height:1.5}
+
+  /* ── SERVICIOS ── */
+  .servicios-section{background:var(--negro);padding:7rem 4rem}
+  .servicios-inner{max-width:1200px;margin:0 auto}
+  .s-tag{font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+    background:linear-gradient(90deg,var(--naranja),var(--magenta));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+  .s-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-0.03em;color:var(--blanco);margin-bottom:0.8rem}
+  .s-sub{font-size:0.95rem;color:rgba(255,255,255,0.35);font-weight:300;max-width:500px;line-height:1.75;margin-bottom:3.5rem}
+  .servicios-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .s-card{
+    background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+    border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;
+    transition:border-color 0.25s,background 0.25s;cursor:pointer;
+  }
+  .s-card:hover{background:rgba(255,255,255,0.06);border-color:rgba(254,11,143,0.35)}
+  .s-card-accent{position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0}
+  .acc-naranja{background:linear-gradient(90deg,var(--naranja),var(--magenta))}
+  .acc-azul{background:linear-gradient(90deg,var(--azul),var(--magenta))}
+  .acc-morado{background:linear-gradient(90deg,var(--morado),var(--azul))}
+  .acc-grad{background:linear-gradient(90deg,var(--naranja),var(--magenta),var(--azul))}
+  .s-card-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:0.7rem;letter-spacing:0.14em;color:rgba(255,255,255,0.2);margin-bottom:1.5rem}
+  .s-card-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.15rem;color:var(--blanco);margin-bottom:0.7rem;line-height:1.2}
+  .s-card-desc{font-size:0.85rem;color:rgba(255,255,255,0.38);line-height:1.7;font-weight:300;margin-bottom:1.5rem}
+  .s-card-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+  .s-tag-pill{
+    font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
+    padding:0.25rem 0.7rem;border-radius:100px;
+    background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.45);
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .s-arrow{
+    position:absolute;bottom:2rem;right:2rem;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;
+    font-size:0.9rem;color:rgba(255,255,255,0.4);transition:background 0.2s,color 0.2s;
+    font-family:'Nunito',sans-serif;font-weight:700;
+  }
+  .s-card:hover .s-arrow{background:linear-gradient(135deg,var(--naranja),var(--magenta));color:var(--blanco)}
+
+  /* ── MISION / VISION ── */
+  .mv-section{padding:7rem 4rem;max-width:1200px;margin:0 auto}
+  .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .mv-card{border-radius:20px;padding:3rem;position:relative;overflow:hidden}
+  .mv-card.mision{background:var(--gris)}
+  .mv-card.vision{
+    background:linear-gradient(135deg,var(--morado) 0%,#3a007a 50%,#1801f5 100%);
+    color:var(--blanco);
+  }
+  .mv-label{font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1rem}
+  .mv-label.dark{color:var(--azul)}
+  .mv-label.light{color:rgba(255,255,255,0.5)}
+  .mv-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.6rem;letter-spacing:-0.02em;margin-bottom:1rem;line-height:1.1}
+  .mv-title.dark{color:var(--negro)}
+  .mv-title.light{color:var(--blanco)}
+  .mv-text{font-size:0.88rem;line-height:1.8;font-weight:300}
+  .mv-text.dark{color:var(--gris2)}
+  .mv-text.light{color:rgba(255,255,255,0.6)}
+  .mv-deco{
+    position:absolute;bottom:-30px;right:-30px;
+    width:140px;height:140px;border-radius:50%;
+    background:rgba(255,255,255,0.04);
+  }
+
+  /* ── PROCESO ── */
+  .proceso-section{background:var(--gris);padding:7rem 4rem}
+  .proceso-inner{max-width:1200px;margin:0 auto}
+  .proceso-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem}
+  .paso{position:relative;padding:2.2rem 1.8rem;background:var(--blanco);border-radius:16px;border:1px solid rgba(0,0,0,0.07);transition:box-shadow 0.2s}
+  .paso:hover{box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+  .paso-num{
+    font-family:'Nunito',sans-serif;font-weight:900;font-size:2.5rem;letter-spacing:-0.04em;
+    line-height:1;margin-bottom:1.2rem;
+    background:linear-gradient(135deg,var(--naranja),var(--magenta));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .paso-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--negro);margin-bottom:0.5rem}
+  .paso-desc{font-size:0.8rem;color:var(--gris2);line-height:1.65;font-weight:300}
+  .paso-line{
+    position:absolute;top:3rem;right:-0.75rem;
+    width:1.5rem;height:2px;
+    background:linear-gradient(90deg,var(--magenta),var(--azul));
+  }
+  .paso:last-child .paso-line{display:none}
+
+  /* ── PARA QUIÉN ── */
+  .target-section{padding:7rem 4rem;max-width:1200px;margin:0 auto}
+  .p-tag{font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--magenta);margin-bottom:1rem}
+  .p-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2rem,3.5vw,2.8rem);letter-spacing:-0.03em;color:var(--negro);margin-bottom:1rem}
+  .p-sub{font-size:0.95rem;color:var(--gris2);font-weight:300;max-width:500px;line-height:1.75;margin-bottom:3.5rem}
+  .target-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .t-card{border-radius:20px;padding:2.8rem;border:1.5px solid}
+  .t-card.empresas{border-color:rgba(24,1,245,0.2);background:#F7F7FF}
+  .t-card.emprendimientos{border-color:rgba(254,11,143,0.2);background:#FFF5FA}
+  .t-badge{
+    display:inline-block;padding:0.3rem 0.9rem;border-radius:100px;
+    font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem;
+  }
+  .badge-azul{background:rgba(24,1,245,0.08);color:var(--azul)}
+  .badge-magenta{background:rgba(254,11,143,0.1);color:var(--magenta)}
+  .t-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.35rem;letter-spacing:-0.02em;color:var(--negro);margin-bottom:0.7rem;line-height:1.2}
+  .t-desc{font-size:0.85rem;color:var(--gris2);line-height:1.75;font-weight:300;margin-bottom:1.5rem}
+  .t-list{list-style:none;display:flex;flex-direction:column;gap:0.55rem}
+  .t-list li{font-size:0.83rem;color:var(--negro);font-weight:400;display:flex;align-items:flex-start;gap:0.6rem;line-height:1.4}
+  .t-list li::before{content:'→';font-weight:800;flex-shrink:0;margin-top:1px}
+  .t-list.azul li::before{color:var(--azul)}
+  .t-list.magenta li::before{color:var(--magenta)}
+
+  /* ── CTA FINAL ── */
+  .cta-final{
+    background:var(--negro);padding:8rem 4rem;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .cta-final::before{
+    content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(254,11,143,0.15) 0%,rgba(24,1,245,0.1) 50%,transparent 70%);
+  }
+  .cta-final h2{
+    font-family:'Nunito',sans-serif;font-weight:900;
+    font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.03em;
+    color:var(--blanco);margin-bottom:1rem;line-height:1.05;position:relative;z-index:1;
+  }
+  .cta-final h2 span{
+    background:linear-gradient(90deg,var(--naranja),var(--magenta));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .cta-final p{font-size:0.95rem;color:rgba(255,255,255,0.4);font-weight:300;max-width:460px;margin:0 auto 3rem;line-height:1.75;position:relative;z-index:1}
+  .cta-contact-info{
+    display:flex;justify-content:center;gap:3rem;margin-bottom:3rem;
+    position:relative;z-index:1;
+  }
+  .contact-item{text-align:center}
+  .contact-label{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.3rem;font-weight:600}
+  .contact-val{font-size:0.85rem;color:rgba(255,255,255,0.7);font-weight:400}
+  .contact-val.accent{
+    background:linear-gradient(90deg,var(--naranja),var(--magenta));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;
+  }
+
+  /* ── FOOTER ── */
+  footer{background:#0a0a0a;padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.05)}
+  .footer-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--blanco);letter-spacing:-0.02em}
+  .footer-logo span{
+    background:linear-gradient(135deg,var(--naranja),var(--magenta));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .footer-sub{font-size:0.55rem;letter-spacing:0.16em;color:rgba(255,255,255,0.25);display:block;text-transform:uppercase;margin-top:-3px}
+  .footer-links{display:flex;gap:1.5rem;list-style:none}
+  .footer-links a{font-size:0.78rem;color:rgba(255,255,255,0.3);text-decoration:none;font-weight:300;transition:color 0.2s}
+  .footer-links a:hover{color:var(--blanco)}
+  .footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.2);font-weight:300}
+</style>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="logo-text">conect <span>2b</span></div>
+    <span class="logo-sub">AGENCIA DIGITAL</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Proceso</a></li>
+    <li><a href="#">Nosotros</a></li>
+    <li><a href="#" class="nav-cta">Hablemos →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Agencia Digital — Lima, Perú</div>
+    <h1>
+      No basta con<br>aparecer. <span class="grad">Es necesario<br>tener presencia.</span>
+    </h1>
+    <p class="hero-tagline">
+      Somos más que una agencia digital. Somos el sistema diseñado para transformar la visibilidad de tu marca en oportunidades reales de negocio.
+    </p>
+    <div class="hero-btns">
+      <button class="btn-grad">Empezar ahora →</button>
+      <button class="btn-outline">Ver servicios</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-label">Lo que hacemos por tu marca</div>
+      <div class="stat-num">+340%</div>
+      <div class="stat-desc">alcance promedio en los primeros 3 meses</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Contenido</div>
+        <div class="stat-num" style="font-size:2rem">60+</div>
+        <div class="stat-desc">piezas mensuales</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Marcas activas</div>
+        <div class="stat-num" style="font-size:2rem">20+</div>
+        <div class="stat-desc">confían en nosotros</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Nuestros pilares</div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem">
+        <span style="font-size:0.7rem;padding:0.25rem 0.7rem;border-radius:100px;border:1px solid rgba(246,76,26,0.4);color:rgba(246,76,26,0.9);font-weight:600">Redes sociales</span>
+        <span style="font-size:0.7rem;padding:0.25rem 0.7rem;border-radius:100px;border:1px solid rgba(254,11,143,0.4);color:rgba(254,11,143,0.9);font-weight:600">Publicidad digital</span>
+        <span style="font-size:0.7rem;padding:0.25rem 0.7rem;border-radius:100px;border:1px solid rgba(24,1,245,0.5);color:rgba(100,120,255,1);font-weight:600">Experiencias de marca</span>
+        <span style="font-size:0.7rem;padding:0.25rem 0.7rem;border-radius:100px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-weight:600">Contenido de valor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Estrategia antes que tendencia <span>✦</span> Creatividad con propósito <span>✦</span> Resultados medibles <span>✦</span> Evolución constante <span>✦</span> Conectamos marcas con personas <span>✦</span></span>
+    <span class="ticker-item">Estrategia antes que tendencia <span>✦</span> Creatividad con propósito <span>✦</span> Resultados medibles <span>✦</span> Evolución constante <span>✦</span> Conectamos marcas con personas <span>✦</span></span>
+  </div>
+</div>
+
+<!-- QUIÉNES SOMOS -->
+<div style="max-width:1200px;margin:0 auto">
+  <div class="about">
+    <div class="about-left">
+      <div class="tag">¿Quiénes somos?</div>
+      <h2>Más que una agencia. <span>Un sistema de crecimiento.</span></h2>
+      <p>Conectamos marcas con personas, estrategia con resultados y negocios con un crecimiento que se puede medir.</p>
+      <p>Nuestro trabajo no se trata de seguir tendencias vacías; se trata de construir <strong>conexiones auténticas que generen negocio.</strong> Creamos sistemas digitales con intencionalidad, donde la creatividad siempre tiene un propósito: vender y posicionar.</p>
+      <p>Somos el <strong>aliado estratégico</strong> que acompaña a emprendedores y PYMES para convertir sus ideas en resultados sostenibles.</p>
+    </div>
+    <div class="about-right">
+      <div class="valor-card">
+        <div class="valor-dot dot-naranja"></div>
+        <div><div class="valor-title">Estrategia antes que tendencia.</div><div class="valor-desc">Tomamos decisiones basadas en datos y objetivos, no en lo que está de moda.</div></div>
+      </div>
+      <div class="valor-card">
+        <div class="valor-dot dot-magenta"></div>
+        <div><div class="valor-title">Creatividad con propósito.</div><div class="valor-desc">Cada pieza que creamos tiene un objetivo claro: conectar, posicionar y vender.</div></div>
+      </div>
+      <div class="valor-card">
+        <div class="valor-dot dot-azul"></div>
+        <div><div class="valor-title">Resultados medibles.</div><div class="valor-desc">Lo que no se puede medir, no se puede mejorar. Vivimos por las métricas.</div></div>
+      </div>
+      <div class="valor-card">
+        <div class="valor-dot dot-morado"></div>
+        <div><div class="valor-title">Evolución constante.</div><div class="valor-desc">El mundo digital cambia rápido. Nosotros también — y llevamos a tu marca con nosotros.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<div class="servicios-section">
+  <div class="servicios-inner">
+    <div class="s-tag">Nuestros servicios</div>
+    <h2 class="s-title">Todo lo que tu marca<br>necesita para crecer.</h2>
+    <p class="s-sub">Cuatro pilares integrados para que tu presencia digital tenga coherencia, impacto y resultados reales.</p>
+    <div class="servicios-grid">
+      <div class="s-card">
+        <div class="s-card-accent acc-naranja"></div>
+        <div class="s-card-num">01 / Gestión de redes</div>
+        <div class="s-card-title">Gestión de redes sociales</div>
+        <p class="s-card-desc">Comunidad activa, calendario editorial estratégico y publicaciones que reflejan la voz auténtica de tu marca en cada plataforma — sin que tengas que preocuparte por nada.</p>
+        <div class="s-card-tags">
+          <span class="s-tag-pill">Instagram</span>
+          <span class="s-tag-pill">TikTok</span>
+          <span class="s-tag-pill">Facebook</span>
+          <span class="s-tag-pill">LinkedIn</span>
+          <span class="s-tag-pill">Community management</span>
+        </div>
+        <div class="s-arrow">→</div>
+      </div>
+      <div class="s-card">
+        <div class="s-card-accent acc-azul"></div>
+        <div class="s-card-num">02 / Publicidad</div>
+        <div class="s-card-title">Publicidad digital de alto impacto</div>
+        <p class="s-card-desc">Campañas en Meta, TikTok Ads y Google que llevan a las personas correctas directo a tu oferta. Sin desperdiciar presupuesto. Con resultados que se ven en tu facturación.</p>
+        <div class="s-card-tags">
+          <span class="s-tag-pill">Meta Ads</span>
+          <span class="s-tag-pill">Google Ads</span>
+          <span class="s-tag-pill">TikTok Ads</span>
+          <span class="s-tag-pill">Retargeting</span>
+        </div>
+        <div class="s-arrow">→</div>
+      </div>
+      <div class="s-card">
+        <div class="s-card-accent acc-morado"></div>
+        <div class="s-card-num">03 / Marca</div>
+        <div class="s-card-title">Experiencias de marca</div>
+        <p class="s-card-desc">Diseñamos cómo se siente interactuar con tu marca — desde el primer contacto hasta la fidelización. Identidad, tono, experiencia visual y posicionamiento coherente en todos los canales.</p>
+        <div class="s-card-tags">
+          <span class="s-tag-pill">Identidad visual</span>
+          <span class="s-tag-pill">Branding</span>
+          <span class="s-tag-pill">Posicionamiento</span>
+          <span class="s-tag-pill">Estrategia</span>
+        </div>
+        <div class="s-arrow">→</div>
+      </div>
+      <div class="s-card">
+        <div class="s-card-accent acc-grad"></div>
+        <div class="s-card-num">04 / Contenido</div>
+        <div class="s-card-title">Producción de contenido de valor</div>
+        <p class="s-card-desc">Video, fotografía, diseño gráfico y copy que educan, conectan y convierten. Producción completa — desde el concepto hasta la publicación — para cada canal y formato.</p>
+        <div class="s-card-tags">
+          <span class="s-tag-pill">Video</span>
+          <span class="s-tag-pill">Fotografía</span>
+          <span class="s-tag-pill">Diseño</span>
+          <span class="s-tag-pill">Copywriting</span>
+          <span class="s-tag-pill">Reels</span>
+        </div>
+        <div class="s-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISIÓN / VISIÓN -->
+<div class="mv-section">
+  <div class="mv-grid">
+    <div class="mv-card mision">
+      <div class="mv-label dark">Nuestra misión</div>
+      <div class="mv-title dark">Transformar ideas en crecimiento sostenible.</div>
+      <p class="mv-text dark">Ayudar a emprendedores y empresas a conectar sus marcas con clientes reales, a través de estrategias digitales creativas, medibles y orientadas a resultados.</p>
+      <div class="mv-deco"></div>
+    </div>
+    <div class="mv-card vision">
+      <div class="mv-label light">Nuestra visión</div>
+      <div class="mv-title light">El aliado estratégico de cada negocio que quiere escalar.</div>
+      <p class="mv-text light">Convertirnos en el aliado estratégico de negocios que quieren crecer y escalar en el mundo digital — con resultados que se pueden ver y medir.</p>
+      <div class="mv-deco"></div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- PROCESO -->
+<div class="proceso-section">
+  <div class="proceso-inner">
+    <div class="p-tag" style="color:var(--azul)">Cómo trabajamos</div>
+    <h2 class="p-title">Un proceso simple.<br>Resultados reales.</h2>
+    <p class="p-sub" style="margin-bottom:0">Cuatro pasos que aseguran claridad, ejecución y mejora continua en cada proyecto.</p>
+    <div class="proceso-steps">
+      <div class="paso">
+        <div class="paso-num">01</div>
+        <div class="paso-title">Diagnóstico</div>
+        <p class="paso-desc">Analizamos tu marca, tu audiencia y tu competencia para identificar oportunidades reales y concretas.</p>
+        <div class="paso-line"></div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">02</div>
+        <div class="paso-title">Estrategia</div>
+        <p class="paso-desc">Diseñamos un plan a medida con objetivos claros, canales definidos y métricas que realmente importan.</p>
+        <div class="paso-line"></div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">03</div>
+        <div class="paso-title">Ejecución</div>
+        <p class="paso-desc">Producimos, publicamos y gestionamos todo el contenido y campañas con la máxima calidad posible.</p>
+        <div class="paso-line"></div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">04</div>
+        <div class="paso-title">Optimización</div>
+        <p class="paso-desc">Medimos, aprendemos y mejoramos mes a mes. Los resultados son el único informe que nos interesa.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARA QUIÉN -->
+<div class="target-section">
+  <div class="p-tag">¿Para quién?</div>
+  <h2 class="p-title">Crecemos contigo, sin importar el tamaño.</h2>
+  <p class="p-sub">Trabajamos con empresas establecidas y emprendimientos en desarrollo. El único requisito es querer crecer en serio.</p>
+  <div class="target-grid">
+    <div class="t-card empresas">
+      <div class="t-badge badge-azul">Empresas y PYMES</div>
+      <div class="t-title">Para marcas que ya existen y quieren escalar su presencia digital</div>
+      <p class="t-desc">Tienes una base sólida, clientes y un producto que funciona — pero tu presencia digital no refleja lo que realmente eres ni lo que puedes ofrecer.</p>
+      <ul class="t-list azul">
+        <li>Estrategia de contenido integral y consistente</li>
+        <li>Campañas de publicidad con alto retorno</li>
+        <li>Posicionamiento y diferenciación de marca</li>
+        <li>Gestión profesional de comunidades digitales</li>
+      </ul>
+    </div>
+    <div class="t-card emprendimientos">
+      <div class="t-badge badge-magenta">Emprendedores</div>
+      <div class="t-title">Para ideas que necesitan visibilidad, autoridad y ventas desde el inicio</div>
+      <p class="t-desc">Estás construyendo algo nuevo y necesitas edificar presencia, ganarte la confianza de tu audiencia y generar ventas al mismo tiempo.</p>
+      <ul class="t-list magenta">
+        <li>Identidad de marca y tono de comunicación</li>
+        <li>Lanzamiento estratégico en redes sociales</li>
+        <li>Contenido que genera confianza y convierte</li>
+        <li>Crecimiento orgánico y pagado combinado</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <h2>¿Listo para conectar<br>con <span>quien importa?</span></h2>
+  <p>Cuéntanos tu proyecto y te decimos exactamente cómo podemos ayudarte a crecer. Sin compromisos ni vueltas.</p>
+  <div class="cta-contact-info">
+    <div class="contact-item">
+      <div class="contact-label">WhatsApp</div>
+      <div class="contact-val accent">960 780 540</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Email</div>
+      <div class="contact-val">conect2bagencia@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Sitio web</div>
+      <div class="contact-val">www.conect2b.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Instagram</div>
+      <div class="contact-val accent">@Conect 2b.agencia</div>
+    </div>
+  </div>
+  <button class="btn-grad" style="font-size:1rem;padding:1.1rem 3rem;position:relative;z-index:1">Hablemos hoy →</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">conect <span>2b</span></div>
+    <span class="footer-sub">Agencia Digital</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">TikTok</a></li>
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Facebook</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Conect 2b — Todos los derechos reservados</div>
+</footer>

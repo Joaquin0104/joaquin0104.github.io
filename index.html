@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conect 2b — Agencia Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#1801F5;
+  --magenta:#FE0B8F;
+  --naranja:#F64C1A;
+  --morado:#21004D;
+  --negro:#000000;
+  --negro2:#0a0a0a;
+  --blanco:#FFFFFF;
+  --gris:#F2F2F2;
+  --gris2:#777;
+  --grad:linear-gradient(135deg,var(--naranja),var(--magenta));
+  --grad2:linear-gradient(135deg,var(--naranja),var(--magenta),var(--azul));
+  --grad3:linear-gradient(135deg,var(--morado),var(--azul));
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans',sans-serif;background:var(--blanco);color:var(--negro);overflow-x:hidden;line-height:1.6}
+
+/* ─── PAGES ─── */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+
+/* ─── NAV ─── */
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 4rem;position:sticky;top:0;background:var(--negro);z-index:1000;
+}
+.nav-logo-wrap{cursor:pointer}
+.logo-text{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.45rem;letter-spacing:-0.02em;color:var(--blanco)}
+.logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-size:0.52rem;letter-spacing:0.2em;color:rgba(255,255,255,0.3);display:block;margin-top:-3px;text-transform:uppercase;font-family:'Nunito Sans',sans-serif;font-weight:300}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,0.5);font-size:0.85rem;font-weight:400;transition:color .2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active-link{color:var(--blanco)}
+.nav-cta{background:var(--grad)!important;color:var(--blanco)!important;padding:.55rem 1.5rem;border-radius:100px;font-size:.82rem!important;font-weight:700!important;transition:opacity .2s!important;-webkit-text-fill-color:var(--blanco)!important}
+.nav-cta:hover{opacity:.85!important}
+
+/* ─── BUTTONS ─── */
+.btn-grad{background:var(--grad);color:var(--blanco);padding:.9rem 2.2rem;border-radius:100px;font-weight:700;font-size:.9rem;border:none;cursor:pointer;font-family:'Nunito',sans-serif;transition:opacity .2s,transform .2s;letter-spacing:.01em;display:inline-block;text-decoration:none}
+.btn-grad:hover{opacity:.88;transform:translateY(-2px)}
+.btn-grad-lg{padding:1.1rem 2.8rem;font-size:1rem}
+.btn-outline{background:transparent;color:rgba(255,255,255,.7);padding:.9rem 2.2rem;border-radius:100px;font-weight:400;font-size:.9rem;border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:border-color .2s,color .2s;display:inline-block;text-decoration:none}
+.btn-outline:hover{border-color:rgba(255,255,255,.5);color:var(--blanco)}
+.btn-dark{background:var(--negro);color:var(--blanco);padding:.9rem 2.2rem;border-radius:100px;font-weight:700;font-size:.9rem;border:none;cursor:pointer;font-family:'Nunito',sans-serif;transition:background .2s;display:inline-block;text-decoration:none}
+.btn-dark:hover{background:#222}
+
+/* ─── TICKER ─── */
+.ticker-wrap{background:var(--grad2);overflow:hidden;padding:.8rem 0}
+.ticker{display:flex;gap:3rem;animation:tick 28s linear infinite;white-space:nowrap}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-family:'Nunito',sans-serif;font-size:.76rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.9);flex-shrink:0}
+.ticker-item span{color:rgba(255,255,255,.4);margin:0 1.5rem}
+
+/* ─── SECTION HELPERS ─── */
+.section-tag-color{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9rem}
+.tc-naranja{color:var(--naranja)}
+.tc-azul{color:var(--azul)}
+.tc-magenta{color:var(--magenta)}
+.tc-grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.9rem,3.5vw,2.9rem);letter-spacing:-.03em;line-height:1.06;color:var(--negro);margin-bottom:.9rem}
+.section-title-inv{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.9rem,3.5vw,2.9rem);letter-spacing:-.03em;line-height:1.06;color:var(--blanco);margin-bottom:.9rem}
+.section-sub{font-size:.95rem;color:var(--gris2);font-weight:300;max-width:520px;line-height:1.8;margin-bottom:3rem}
+.section-sub-inv{font-size:.95rem;color:rgba(255,255,255,.38);font-weight:300;max-width:520px;line-height:1.8;margin-bottom:3rem}
+.grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-text2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.inner{max-width:1200px;margin:0 auto;padding:0 4rem}
+.inner-wide{max-width:1400px;margin:0 auto;padding:0 4rem}
+
+/* ─── FOOTER ─── */
+footer{background:var(--negro2);padding:3rem 4rem;border-top:1px solid rgba(255,255,255,.05)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.footer-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--blanco);letter-spacing:-.02em}
+.footer-logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-sub-txt{font-size:.52rem;letter-spacing:.18em;color:rgba(255,255,255,.22);display:block;text-transform:uppercase;margin-top:-3px}
+.footer-links{display:flex;gap:1.5rem;list-style:none}
+.footer-links a{font-size:.78rem;color:rgba(255,255,255,.28);text-decoration:none;font-weight:300;transition:color .2s;cursor:pointer}
+.footer-links a:hover{color:var(--blanco)}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.18);font-weight:300}
+.footer-contact{display:flex;gap:2rem;flex-wrap:wrap}
+.fc-item .fc-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:.2rem;font-weight:600}
+.fc-item .fc-val{font-size:.8rem;color:rgba(255,255,255,.55);font-weight:300}
+.fc-item .fc-val.acc{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
+
+/* ════════════════════════════════
+   PAGE 1 — HOME
+════════════════════════════════ */
+/* HERO */
+.hero{background:var(--negro);display:grid;grid-template-columns:1fr 1fr;min-height:92vh}
+.hero-left{padding:5rem 3rem 5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:.35rem 1rem;margin-bottom:2rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);width:fit-content}
+.hero-eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--grad);animation:pulse 1.6s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+.hero h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2.4rem,4.5vw,3.9rem);line-height:1.02;letter-spacing:-.03em;color:var(--blanco);margin-bottom:1.5rem}
+.hero-tagline{font-size:.93rem;color:rgba(255,255,255,.38);font-weight:300;line-height:1.8;max-width:460px;margin-bottom:3rem;border-left:2px solid var(--magenta);padding-left:1.1rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-right{background:linear-gradient(145deg,#1a004a 0%,#0a001e 45%,#000 100%);display:flex;flex-direction:column;justify-content:center;padding:4rem 3rem;gap:1.2rem;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;top:-60px;right:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(254,11,143,.22) 0%,transparent 70%);pointer-events:none}
+.hero-right::after{content:'';position:absolute;bottom:-70px;left:-30px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(24,1,245,.28) 0%,transparent 70%);pointer-events:none}
+.stat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.4rem 1.8rem;position:relative;z-index:1;transition:border-color .25s}
+.stat-card:hover{border-color:rgba(254,11,143,.35)}
+.stat-label{font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.4rem}
+.stat-num{font-family:'Nunito',sans-serif;font-weight:900;letter-spacing:-.04em;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-num-lg{font-size:2.6rem}
+.stat-num-md{font-size:2rem}
+.stat-desc{font-size:.76rem;color:rgba(255,255,255,.28);margin-top:.3rem;font-weight:300}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;width:100%}
+.pill-tag{font-size:.68rem;padding:.25rem .75rem;border-radius:100px;font-weight:600;display:inline-block}
+.pill-naranja{border:1px solid rgba(246,76,26,.4);color:rgba(246,76,26,.95)}
+.pill-magenta{border:1px solid rgba(254,11,143,.4);color:rgba(254,11,143,.95)}
+.pill-azul{border:1px solid rgba(24,1,245,.5);color:rgba(100,120,255,1)}
+.pill-blanco{border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.45)}
+.pills-wrap{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+
+/* ABOUT HOME */
+.about-home{padding:7rem 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.valor-card{border-radius:14px;padding:1.3rem 1.5rem;display:flex;align-items:flex-start;gap:.9rem;border:1px solid rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s;cursor:default}
+.valor-card:hover{transform:translateX(5px);box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.v1{background:#FFF5F2;border-color:rgba(246,76,26,.12)}
+.v2{background:#FDF0F7;border-color:rgba(254,11,143,.12)}
+.v3{background:#F0F1FF;border-color:rgba(24,1,245,.1)}
+.v4{background:#F5F0FF;border-color:rgba(33,0,77,.1)}
+.valor-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dnaranja{background:var(--naranja)}
+.dmagenta{background:var(--magenta)}
+.dazul{background:var(--azul)}
+.dmorado{background:var(--morado)}
+.valor-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;color:var(--negro);margin-bottom:.2rem}
+.valor-desc{font-size:.78rem;color:var(--gris2);font-weight:300;line-height:1.55}
+.about-valores{display:flex;flex-direction:column;gap:.9rem}
+
+/* SERVICIOS PREVIEW */
+.servicios-preview{background:var(--negro);padding:7rem 0}
+.s-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3.5rem}
+.s-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:border-color .25s,background .25s;cursor:pointer}
+.s-card:hover{background:rgba(255,255,255,.06);border-color:rgba(254,11,143,.3)}
+.s-accent{position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0}
+.sa1{background:linear-gradient(90deg,var(--naranja),var(--magenta))}
+.sa2{background:linear-gradient(90deg,var(--azul),var(--magenta))}
+.sa3{background:linear-gradient(90deg,var(--morado),var(--azul))}
+.sa4{background:var(--grad2)}
+.s-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:.66rem;letter-spacing:.14em;color:rgba(255,255,255,.18);margin-bottom:1.4rem;text-transform:uppercase}
+.s-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.15rem;color:var(--blanco);margin-bottom:.65rem;line-height:1.2}
+.s-desc{font-size:.84rem;color:rgba(255,255,255,.35);line-height:1.72;font-weight:300;margin-bottom:1.4rem}
+.s-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.s-tag-p{font-size:.66rem;font-weight:600;padding:.22rem .68rem;border-radius:100px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.1)}
+.s-arrow{position:absolute;bottom:2rem;right:2rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:rgba(255,255,255,.35);transition:background .2s,color .2s;font-family:'Nunito',sans-serif;font-weight:700}
+.s-card:hover .s-arrow{background:var(--grad);color:var(--blanco)}
+
+/* PROCESO HOME */
+.proceso-home{background:var(--gris);padding:7rem 0}
+.proceso-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem}
+.paso{background:var(--blanco);border-radius:16px;border:1px solid rgba(0,0,0,.07);padding:2.2rem 1.7rem;position:relative;transition:box-shadow .2s}
+.paso:hover{box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.paso-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:2.4rem;letter-spacing:-.04em;line-height:1;margin-bottom:1.1rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.paso-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:.93rem;color:var(--negro);margin-bottom:.45rem}
+.paso-desc{font-size:.78rem;color:var(--gris2);line-height:1.65;font-weight:300}
+.paso-line{position:absolute;top:2.8rem;right:-.75rem;width:1.5rem;height:2px;background:var(--grad)}
+.paso:last-child .paso-line{display:none}
+
+/* MV HOME */
+.mv-home{padding:7rem 0}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.mv-card{border-radius:20px;padding:3rem;position:relative;overflow:hidden}
+.mv-mision{background:var(--gris)}
+.mv-vision{background:linear-gradient(135deg,var(--morado) 0%,#36007a 50%,var(--azul) 100%)}
+.mv-tag{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.9rem}
+.mv-tag.d{color:var(--azul)}.mv-tag.l{color:rgba(255,255,255,.4)}
+.mv-h{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.55rem;letter-spacing:-.02em;margin-bottom:.9rem;line-height:1.12}
+.mv-h.d{color:var(--negro)}.mv-h.l{color:var(--blanco)}
+.mv-p{font-size:.87rem;line-height:1.8;font-weight:300}
+.mv-p.d{color:var(--gris2)}.mv-p.l{color:rgba(255,255,255,.5)}
+.mv-deco{position:absolute;bottom:-35px;right:-35px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.04)}
+
+/* TARGET HOME */
+.target-home{background:var(--negro);padding:7rem 0}
+.target-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3.5rem}
+.t-card{border-radius:20px;padding:2.8rem;border:1.5px solid}
+.t-emp{border-color:rgba(24,1,245,.2);background:rgba(24,1,245,.04)}
+.t-empr{border-color:rgba(254,11,143,.2);background:rgba(254,11,143,.04)}
+.t-badge{display:inline-block;padding:.3rem .9rem;border-radius:100px;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.4rem}
+.tb-azul{background:rgba(24,1,245,.12);color:rgba(100,120,255,1)}
+.tb-magenta{background:rgba(254,11,143,.12);color:var(--magenta)}
+.t-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:-.02em;color:var(--blanco);margin-bottom:.65rem;line-height:1.2}
+.t-desc{font-size:.83rem;color:rgba(255,255,255,.35);line-height:1.8;font-weight:300;margin-bottom:1.4rem}
+.t-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.t-list li{font-size:.81rem;color:rgba(255,255,255,.6);font-weight:300;display:flex;align-items:flex-start;gap:.55rem;line-height:1.45}
+.t-list li::before{content:'→';font-weight:800;flex-shrink:0;margin-top:1px}
+.t-list.az li::before{color:rgba(100,140,255,1)}
+.t-list.mg li::before{color:var(--magenta)}
+
+/* CTA HOME */
+.cta-home{background:var(--negro);padding:8rem 4rem;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06)}
+.cta-home::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(254,11,143,.12) 0%,rgba(24,1,245,.08) 50%,transparent 70%)}
+.cta-home h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.03em;color:var(--blanco);margin-bottom:1rem;position:relative;z-index:1;line-height:1.06}
+.cta-home p{font-size:.93rem;color:rgba(255,255,255,.35);font-weight:300;max-width:460px;margin:0 auto 2.5rem;line-height:1.8;position:relative;z-index:1}
+.cta-contacts{display:flex;justify-content:center;gap:3rem;margin-bottom:3rem;position:relative;z-index:1;flex-wrap:wrap}
+.cc-item .cc-label{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:.25rem;font-weight:600}
+.cc-item .cc-val{font-size:.82rem;color:rgba(255,255,255,.55);font-weight:300}
+.cc-item .cc-val.acc{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
+
+/* ════════════════════════════════
+   INNER PAGES SHARED
+════════════════════════════════ */
+.page-hero{background:var(--negro);padding:6rem 4rem 5rem;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),var(--azul),transparent)}
+.ph-back{display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.38);font-size:.78rem;font-weight:400;cursor:pointer;margin-bottom:2rem;transition:color .2s;background:none;border:none;font-family:'Nunito Sans',sans-serif}
+.ph-back:hover{color:var(--blanco)}
+.ph-tag{font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1rem;display:block}
+.ph-h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-.03em;line-height:1.02;color:var(--blanco);margin-bottom:1.4rem;max-width:750px}
+.ph-sub{font-size:1rem;color:rgba(255,255,255,.38);font-weight:300;line-height:1.8;max-width:580px;margin-bottom:3rem}
+.ph-deco{position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;pointer-events:none}
+.ph-deco-1{background:radial-gradient(circle,rgba(254,11,143,.18) 0%,transparent 70%)}
+.ph-deco-2{background:radial-gradient(circle,rgba(24,1,245,.22) 0%,transparent 70%)}
+.ph-deco-3{background:radial-gradient(circle,rgba(246,76,26,.2) 0%,transparent 70%)}
+.ph-deco-4{background:radial-gradient(circle,rgba(33,0,77,.5) 0%,transparent 70%)}
+.ph-pills{display:flex;gap:.5rem;flex-wrap:wrap}
+.ph-pill{font-size:.7rem;font-weight:600;padding:.3rem .85rem;border-radius:100px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1)}
+
+/* WHAT WE DO SECTION */
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.w-card{background:var(--gris);border-radius:16px;padding:2rem;border:1px solid rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s}
+.w-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+.w-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem}
+.wi-nar{background:rgba(246,76,26,.1)}
+.wi-mag{background:rgba(254,11,143,.1)}
+.wi-azul{background:rgba(24,1,245,.08)}
+.wi-mrd{background:rgba(33,0,77,.08)}
+.wi-grn{background:rgba(0,160,80,.08)}
+.wi-amr{background:rgba(255,180,0,.1)}
+.w-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;color:var(--negro);margin-bottom:.45rem}
+.w-desc{font-size:.8rem;color:var(--gris2);line-height:1.65;font-weight:300}
+
+/* DARK SECTION */
+.dark-section{background:var(--negro);padding:7rem 0}
+.dark-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:2.5rem;transition:border-color .25s}
+.dark-card:hover{border-color:rgba(254,11,143,.3)}
+
+/* RESULTS SECTION */
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem}
+.r-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.8rem;text-align:center}
+.r-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:2.4rem;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.4rem}
+.r-label{font-size:.75rem;color:rgba(255,255,255,.35);font-weight:300;line-height:1.5}
+
+/* PROCESS INNER PAGES */
+.ip-steps{display:flex;flex-direction:column;gap:0}
+.ip-step{display:grid;grid-template-columns:80px 1fr;gap:2.5rem;padding:2.5rem 0;border-bottom:1px solid rgba(0,0,0,.07);align-items:flex-start}
+.ip-step:last-child{border-bottom:none}
+.ip-step-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:3rem;letter-spacing:-.04em;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ip-step-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;color:var(--negro);margin-bottom:.5rem}
+.ip-step-desc{font-size:.87rem;color:var(--gris2);line-height:1.75;font-weight:300}
+.ip-step-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}
+.ip-tag{font-size:.66rem;font-weight:600;padding:.22rem .65rem;border-radius:100px;background:var(--gris);color:var(--gris2);border:1px solid rgba(0,0,0,.08)}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3.5rem}
+.why-card{border-radius:16px;padding:2rem;display:flex;gap:1.2rem;align-items:flex-start}
+.why-card:nth-child(odd){background:var(--gris)}
+.why-card:nth-child(even){background:#FDF0F7;border:1px solid rgba(254,11,143,.12)}
+.why-icon{width:40px;height:40px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.why-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:.92rem;color:var(--negro);margin-bottom:.35rem}
+.why-desc{font-size:.8rem;color:var(--gris2);line-height:1.62;font-weight:300}
+
+/* PLANS SECTION */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.plan-card{border-radius:20px;padding:2.5rem;border:1.5px solid rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;background:var(--blanco);position:relative}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.1)}
+.plan-card.featured{background:var(--negro);border-color:rgba(254,11,143,.4)}
+.plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--grad);color:var(--blanco);font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:.3rem 1rem;border-radius:100px;white-space:nowrap;text-transform:uppercase}
+.plan-name{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--negro);margin-bottom:.4rem}
+.plan-name.inv{color:var(--blanco)}
+.plan-tag{font-size:.68rem;color:var(--gris2);font-weight:300;margin-bottom:1.5rem;display:block}
+.plan-tag.inv{color:rgba(255,255,255,.35)}
+.plan-price{font-family:'Nunito',sans-serif;font-weight:900;font-size:2.2rem;letter-spacing:-.03em;color:var(--negro);margin-bottom:.2rem}
+.plan-price.inv{color:var(--blanco)}
+.plan-price.grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.plan-period{font-size:.76rem;color:var(--gris2);margin-bottom:1.8rem;font-weight:300}
+.plan-period.inv{color:rgba(255,255,255,.35)}
+.plan-divider{height:1px;background:rgba(0,0,0,.07);margin-bottom:1.5rem}
+.plan-divider.inv{background:rgba(255,255,255,.1)}
+.plan-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:2rem}
+.plan-list li{font-size:.82rem;color:var(--negro);display:flex;gap:.55rem;font-weight:300;line-height:1.4}
+.plan-list li.inv{color:rgba(255,255,255,.6)}
+.plan-list li::before{content:'✓';color:var(--magenta);font-weight:800;flex-shrink:0}
+
+/* CTA INNER */
+.cta-inner{background:var(--negro);padding:6rem 4rem;text-align:center;position:relative;overflow:hidden;margin-top:0}
+.cta-inner::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(254,11,143,.1) 0%,rgba(24,1,245,.07) 50%,transparent 70%)}
+.cta-inner h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.03em;color:var(--blanco);margin-bottom:.9rem;position:relative;z-index:1;line-height:1.08}
+.cta-inner p{font-size:.9rem;color:rgba(255,255,255,.35);font-weight:300;max-width:440px;margin:0 auto 2.5rem;line-height:1.8;position:relative;z-index:1}
+
+/* BACK BUTTON */
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.4);font-size:.78rem;font-weight:400;cursor:pointer;transition:color .2s;background:none;border:none;font-family:'Nunito Sans',sans-serif;padding:0;margin-bottom:2rem}
+.back-btn:hover{color:var(--blanco)}
+
+/* ═══ SCROLL ANIMATION ═══ */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:none}
+.fade-in-delay-1{transition-delay:.1s}
+.fade-in-delay-2{transition-delay:.2s}
+.fade-in-delay-3{transition-delay:.3s}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo-wrap" onclick="showPage('home')">
+    <div class="logo-text">conect <span>2b</span></div>
+    <span class="logo-sub">Agencia Digital</span>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home">Inicio</a></li>
+    <li><a onclick="showPage('servicios')" id="nav-servicios">Servicios</a></li>
+    <li><a onclick="showPage('nosotros')" id="nav-nosotros">Nosotros</a></li>
+    <li><a onclick="showPage('contacto')" class="nav-cta">Hablemos →</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════════════════════
+     PAGE: HOME
+════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Agencia Digital — Lima, Perú</div>
+      <h1>No basta con aparecer.<br><span class="grad-text">Es necesario<br>tener presencia.</span></h1>
+      <p class="hero-tagline">Somos más que una agencia digital. Somos el sistema diseñado para transformar la visibilidad de tu marca en oportunidades reales de negocio.</p>
+      <div class="hero-btns">
+        <button class="btn-grad" onclick="showPage('contacto')">Empezar ahora →</button>
+        <button class="btn-outline" onclick="showPage('servicios')">Ver servicios</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-label">Alcance promedio logrado</div>
+        <div class="stat-num stat-num-lg">+340%</div>
+        <div class="stat-desc">crecimiento en los primeros 3 meses de gestión</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-label">Contenido mensual</div>
+          <div class="stat-num stat-num-md">60+</div>
+          <div class="stat-desc">piezas por cliente</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Marcas activas</div>
+          <div class="stat-num stat-num-md">20+</div>
+          <div class="stat-desc">confían en nosotros</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Nuestros pilares</div>
+        <div class="pills-wrap">
+          <span class="pill-tag pill-naranja">Redes sociales</span>
+          <span class="pill-tag pill-magenta">Publicidad digital</span>
+          <span class="pill-tag pill-azul">Experiencias de marca</span>
+          <span class="pill-tag pill-blanco">Contenido de valor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">Estrategia antes que tendencia <span>✦</span> Creatividad con propósito <span>✦</span> Resultados medibles <span>✦</span> Evolución constante <span>✦</span> Conectamos marcas con personas <span>✦</span> Visibilidad en oportunidades <span>✦</span></span>
+      <span class="ticker-item">Estrategia antes que tendencia <span>✦</span> Creatividad con propósito <span>✦</span> Resultados medibles <span>✦</span> Evolución constante <span>✦</span> Conectamos marcas con personas <span>✦</span> Visibilidad en oportunidades <span>✦</span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-home">
+    <div class="inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-tag-color tc-azul fade-in">¿Quiénes somos?</div>
+          <h2 class="section-title fade-in">Más que una agencia.<br><span class="grad-text">Un sistema de crecimiento.</span></h2>
+          <p style="font-size:.93rem;color:var(--gris2);font-weight:300;line-height:1.8;margin-bottom:1rem" class="fade-in">Conectamos marcas con personas, estrategia con resultados y negocios con un crecimiento que se puede medir.</p>
+          <p style="font-size:.93rem;color:var(--gris2);font-weight:300;line-height:1.8;margin-bottom:1rem" class="fade-in">Nuestro trabajo no se trata de seguir tendencias vacías; se trata de construir <strong style="color:var(--negro);font-weight:700">conexiones auténticas que generen negocio.</strong></p>
+          <p style="font-size:.93rem;color:var(--gris2);font-weight:300;line-height:1.8;margin-bottom:2.5rem" class="fade-in">Somos el <strong style="color:var(--negro);font-weight:700">aliado estratégico</strong> que acompaña a emprendedores y PYMES para convertir sus ideas en resultados sostenibles.</p>
+          <button class="btn-dark" onclick="showPage('nosotros')">Conocer más →</button>
+        </div>
+        <div class="about-valores">
+          <div class="valor-card v1 fade-in"><div class="valor-dot dnaranja"></div><div><div class="valor-title">Estrategia antes que tendencia.</div><div class="valor-desc">Decisiones basadas en datos y objetivos, no en lo que está de moda.</div></div></div>
+          <div class="valor-card v2 fade-in fade-in-delay-1"><div class="valor-dot dmagenta"></div><div><div class="valor-title">Creatividad con propósito.</div><div class="valor-desc">Cada pieza que creamos tiene un objetivo: conectar, posicionar y vender.</div></div></div>
+          <div class="valor-card v3 fade-in fade-in-delay-2"><div class="valor-dot dazul"></div><div><div class="valor-title">Resultados medibles.</div><div class="valor-desc">Lo que no se puede medir, no se puede mejorar. Vivimos por las métricas.</div></div></div>
+          <div class="valor-card v4 fade-in fade-in-delay-3"><div class="valor-dot dmorado"></div><div><div class="valor-title">Evolución constante.</div><div class="valor-desc">El mundo digital cambia rápido. Nosotros también, y tu marca con nosotros.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS PREVIEW -->
+  <section class="servicios-preview">
+    <div class="inner">
+      <div class="section-tag-color tc-grad">Nuestros servicios</div>
+      <h2 class="section-title-inv">Todo lo que tu marca<br>necesita para crecer.</h2>
+      <p class="section-sub-inv">Cuatro pilares integrados para que tu presencia digital tenga coherencia, impacto y resultados reales.</p>
+      <div class="s-grid">
+        <div class="s-card" onclick="showPage('redes')">
+          <div class="s-accent sa1"></div>
+          <div class="s-num">01 / Gestión de redes</div>
+          <div class="s-name">Gestión de redes sociales</div>
+          <p class="s-desc">Comunidad activa, calendario editorial y publicaciones que reflejan la voz auténtica de tu marca — sin que tengas que preocuparte por nada.</p>
+          <div class="s-tags"><span class="s-tag-p">Instagram</span><span class="s-tag-p">TikTok</span><span class="s-tag-p">Facebook</span><span class="s-tag-p">LinkedIn</span></div>
+          <div class="s-arrow">→</div>
+        </div>
+        <div class="s-card" onclick="showPage('publicidad')">
+          <div class="s-accent sa2"></div>
+          <div class="s-num">02 / Publicidad digital</div>
+          <div class="s-name">Publicidad digital de alto impacto</div>
+          <p class="s-desc">Campañas en Meta, TikTok y Google que llevan a las personas correctas directo a tu oferta. Sin desperdiciar presupuesto.</p>
+          <div class="s-tags"><span class="s-tag-p">Meta Ads</span><span class="s-tag-p">Google Ads</span><span class="s-tag-p">TikTok Ads</span><span class="s-tag-p">Retargeting</span></div>
+          <div class="s-arrow">→</div>
+        </div>
+        <div class="s-card" onclick="showPage('marca')">
+          <div class="s-accent sa3"></div>
+          <div class="s-num">03 / Experiencias de marca</div>
+          <div class="s-name">Experiencias de marca</div>
+          <p class="s-desc">Diseñamos cómo se siente interactuar con tu marca — desde el primer contacto hasta la fidelización. Identidad, tono y posicionamiento.</p>
+          <div class="s-tags"><span class="s-tag-p">Branding</span><span class="s-tag-p">Identidad</span><span class="s-tag-p">Estrategia</span><span class="s-tag-p">Posicionamiento</span></div>
+          <div class="s-arrow">→</div>
+        </div>
+        <div class="s-card" onclick="showPage('contenido')">
+          <div class="s-accent sa4"></div>
+          <div class="s-num">04 / Contenido de valor</div>
+          <div class="s-name">Producción de contenido de valor</div>
+          <p class="s-desc">Video, fotografía, diseño y copy que educan, conectan y convierten. Producción completa para cada canal y formato.</p>
+          <div class="s-tags"><span class="s-tag-p">Video</span><span class="s-tag-p">Fotografía</span><span class="s-tag-p">Diseño</span><span class="s-tag-p">Copywriting</span></div>
+          <div class="s-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="proceso-home">
+    <div class="inner">
+      <div class="section-tag-color tc-azul">Cómo trabajamos</div>
+      <h2 class="section-title">Un proceso simple.<br>Resultados reales.</h2>
+      <div class="proceso-steps">
+        <div class="paso"><div class="paso-num">01</div><div class="paso-title">Diagnóstico</div><p class="paso-desc">Analizamos tu marca, audiencia y competencia para identificar oportunidades reales.</p><div class="paso-line"></div></div>
+        <div class="paso"><div class="paso-num">02</div><div class="paso-title">Estrategia</div><p class="paso-desc">Diseñamos un plan con objetivos claros, canales definidos y métricas que importan.</p><div class="paso-line"></div></div>
+        <div class="paso"><div class="paso-num">03</div><div class="paso-title">Ejecución</div><p class="paso-desc">Producimos y gestionamos todo el contenido y campañas con máxima calidad.</p><div class="paso-line"></div></div>
+        <div class="paso"><div class="paso-num">04</div><div class="paso-title">Optimización</div><p class="paso-desc">Medimos, aprendemos y mejoramos mes a mes para maximizar resultados.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISIÓN / VISIÓN -->
+  <section class="mv-home">
+    <div class="inner">
+      <div class="mv-grid">
+        <div class="mv-card mv-mision">
+          <div class="mv-tag d">Nuestra misión</div>
+          <div class="mv-h d">Transformar ideas en crecimiento sostenible.</div>
+          <p class="mv-p d">Ayudar a emprendedores y empresas a conectar sus marcas con clientes reales, a través de estrategias digitales creativas, medibles y orientadas a resultados.</p>
+          <div class="mv-deco"></div>
+        </div>
+        <div class="mv-card mv-vision">
+          <div class="mv-tag l">Nuestra visión</div>
+          <div class="mv-h l">El aliado estratégico de cada negocio que quiere escalar.</div>
+          <p class="mv-p l">Convertirnos en el referente de agencias digitales que acompañan a negocios en su crecimiento con resultados que se pueden ver, medir y celebrar.</p>
+          <div class="mv-deco"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUIÉN -->
+  <section class="target-home">
+    <div class="inner">
+      <div class="section-tag-color tc-magenta">¿Para quién?</div>
+      <h2 class="section-title-inv">Crecemos contigo,<br>sin importar el tamaño.</h2>
+      <p class="section-sub-inv">Trabajamos con empresas establecidas y emprendimientos en desarrollo. El único requisito es querer crecer en serio.</p>
+      <div class="target-grid">
+        <div class="t-card t-emp">
+          <div class="t-badge tb-azul">Empresas y PYMES</div>
+          <div class="t-title">Para marcas que ya existen y quieren escalar</div>
+          <p class="t-desc">Tienes una base sólida, clientes y un producto que funciona — pero tu presencia digital no refleja lo que realmente eres.</p>
+          <ul class="t-list az"><li>Estrategia de contenido integral</li><li>Campañas de publicidad con alto retorno</li><li>Posicionamiento y diferenciación de marca</li><li>Gestión profesional de comunidades</li></ul>
+        </div>
+        <div class="t-card t-empr">
+          <div class="t-badge tb-magenta">Emprendedores</div>
+          <div class="t-title">Para ideas que necesitan visibilidad y ventas desde el inicio</div>
+          <p class="t-desc">Estás construyendo algo nuevo y necesitas edificar presencia, ganar confianza y generar ventas al mismo tiempo.</p>
+          <ul class="t-list mg"><li>Identidad de marca y tono de comunicación</li><li>Lanzamiento estratégico en redes</li><li>Contenido que genera confianza y convierte</li><li>Crecimiento orgánico y pagado combinado</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-home">
+    <h2>¿Listo para conectar<br>con <span class="grad-text">quien importa?</span></h2>
+    <p>Cuéntanos tu proyecto y te decimos exactamente cómo podemos ayudarte a crecer. Sin compromisos.</p>
+    <div class="cta-contacts">
+      <div class="cc-item"><div class="cc-label">WhatsApp</div><div class="cc-val acc">960 780 540</div></div>
+      <div class="cc-item"><div class="cc-label">Email</div><div class="cc-val">conect2bagencia@gmail.com</div></div>
+      <div class="cc-item"><div class="cc-label">Instagram</div><div class="cc-val acc">@Conect 2b.agencia</div></div>
+      <div class="cc-item"><div class="cc-label">Web</div><div class="cc-val">www.conect2b.com</div></div>
+    </div>
+    <button class="btn-grad btn-grad-lg" onclick="showPage('contacto')" style="position:relative;z-index:1">Hablemos hoy →</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('redes')">Redes sociales</a></li>
+        <li><a onclick="showPage('publicidad')">Publicidad</a></li>
+        <li><a onclick="showPage('marca')">Marca</a></li>
+        <li><a onclick="showPage('contenido')">Contenido</a></li>
+      </ul>
+      <div class="footer-copy">© 2025 Conect 2b — Todos los derechos reservados</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: SERVICIOS
+════════════════════════════════ -->
+<div id="page-servicios" class="page">
+  <div class="page-hero">
+    <div class="ph-deco ph-deco-1" style="top:-80px;right:-80px"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('home')">← Volver al inicio</button>
+      <span class="ph-tag tc-grad">Lo que hacemos</span>
+      <h1 class="ph-h1">Servicios diseñados para <span class="grad-text">hacer crecer tu negocio.</span></h1>
+      <p class="ph-sub">Cuatro áreas de trabajo integradas que actúan como un sistema. Porque el crecimiento real requiere estrategia, ejecución y mejora continua.</p>
+    </div>
+  </div>
+
+  <section style="padding:7rem 0;background:var(--blanco)">
+    <div class="inner">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem">
+        <div onclick="showPage('redes')" style="background:var(--gris);border-radius:20px;padding:2.8rem;cursor:pointer;border:1.5px solid rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s,border-color .2s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,.1)';this.style.borderColor='rgba(246,76,26,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(0,0,0,.07)'">
+          <div style="width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--naranja),var(--magenta));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.5rem">📱</div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--naranja);margin-bottom:.7rem">01 — Gestión de redes</div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.02em;color:var(--negro);margin-bottom:.7rem;line-height:1.1">Gestión de redes sociales</div>
+          <p style="font-size:.85rem;color:var(--gris2);line-height:1.75;font-weight:300;margin-bottom:1.5rem">Construimos y gestionamos tu comunidad digital con una estrategia editorial que refleja la esencia de tu marca y genera engagement real.</p>
+          <span style="font-size:.8rem;font-weight:700;color:var(--naranja)">Ver servicio →</span>
+        </div>
+        <div onclick="showPage('publicidad')" style="background:var(--gris);border-radius:20px;padding:2.8rem;cursor:pointer;border:1.5px solid rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s,border-color .2s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,.1)';this.style.borderColor='rgba(24,1,245,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(0,0,0,.07)'">
+          <div style="width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--azul),var(--magenta));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.5rem">📢</div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:.7rem">02 — Publicidad digital</div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.02em;color:var(--negro);margin-bottom:.7rem;line-height:1.1">Publicidad digital de alto impacto</div>
+          <p style="font-size:.85rem;color:var(--gris2);line-height:1.75;font-weight:300;margin-bottom:1.5rem">Campañas que llevan tu mensaje a las personas correctas, en el momento correcto, con el presupuesto optimizado para el mejor retorno.</p>
+          <span style="font-size:.8rem;font-weight:700;color:var(--azul)">Ver servicio →</span>
+        </div>
+        <div onclick="showPage('marca')" style="background:var(--gris);border-radius:20px;padding:2.8rem;cursor:pointer;border:1.5px solid rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s,border-color .2s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,.1)';this.style.borderColor='rgba(33,0,77,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(0,0,0,.07)'">
+          <div style="width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,var(--morado),var(--azul));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.5rem">✨</div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--morado);margin-bottom:.7rem">03 — Experiencias de marca</div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.02em;color:var(--negro);margin-bottom:.7rem;line-height:1.1">Experiencias de marca</div>
+          <p style="font-size:.85rem;color:var(--gris2);line-height:1.75;font-weight:300;margin-bottom:1.5rem">Construimos la identidad que hace que tu marca sea reconocida, recordada y preferida. Desde el naming hasta el sistema visual completo.</p>
+          <span style="font-size:.8rem;font-weight:700;color:var(--morado)">Ver servicio →</span>
+        </div>
+        <div onclick="showPage('contenido')" style="background:var(--gris);border-radius:20px;padding:2.8rem;cursor:pointer;border:1.5px solid rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s,border-color .2s" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,.1)';this.style.borderColor='rgba(254,11,143,.3)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(0,0,0,.07)'">
+          <div style="width:50px;height:50px;border-radius:14px;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.5rem">🎬</div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta);margin-bottom:.7rem">04 — Contenido de valor</div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.02em;color:var(--negro);margin-bottom:.7rem;line-height:1.1">Producción de contenido de valor</div>
+          <p style="font-size:.85rem;color:var(--gris2);line-height:1.75;font-weight:300;margin-bottom:1.5rem">Video, fotografía, diseño y copy que cuentan la historia de tu marca de forma que conecta, educa y convierte a tu audiencia.</p>
+          <span style="font-size:.8rem;font-weight:700;color:var(--magenta)">Ver servicio →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-inner">
+    <h2>¿No sabes cuál servicio<br>necesitas? <span class="grad-text">Hablemos.</span></h2>
+    <p>Te ayudamos a identificar qué necesita tu marca para crecer, sin compromisos ni rodeos.</p>
+    <button class="btn-grad" onclick="showPage('contacto')" style="position:relative;z-index:1">Agendar conversación →</button>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('home')">Inicio</a></li><li><a onclick="showPage('nosotros')">Nosotros</a></li><li><a onclick="showPage('contacto')">Contacto</a></li></ul><div class="footer-copy">© 2025 Conect 2b</div></div></footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: REDES SOCIALES
+════════════════════════════════ -->
+<div id="page-redes" class="page">
+  <div class="page-hero">
+    <div class="ph-deco ph-deco-3"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('servicios')">← Volver a servicios</button>
+      <span class="ph-tag tc-naranja">01 — Gestión de redes</span>
+      <h1 class="ph-h1">Tu marca activa, <span style="background:linear-gradient(90deg,var(--naranja),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">presente y conectada</span><br>todos los días.</h1>
+      <p class="ph-sub">Gestionamos tus redes sociales de principio a fin: estrategia, contenido, publicación y comunidad. Tú te enfocas en tu negocio, nosotros en hacer crecer tu presencia digital.</p>
+      <div class="ph-pills"><span class="ph-pill">Instagram</span><span class="ph-pill">TikTok</span><span class="ph-pill">Facebook</span><span class="ph-pill">LinkedIn</span><span class="ph-pill">YouTube Shorts</span><span class="ph-pill">X / Twitter</span></div>
+    </div>
+  </div>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color tc-naranja">¿Qué incluye?</div>
+      <h2 class="section-title">Todo lo que necesitas<br>para destacar en redes.</h2>
+      <div class="what-grid">
+        <div class="w-card"><div class="w-icon wi-nar">🗓️</div><div class="w-title">Calendario editorial</div><p class="w-desc">Planificamos cada publicación con intención: días, horarios, formatos y mensajes alineados a tus objetivos de negocio.</p></div>
+        <div class="w-card"><div class="w-icon wi-mag">✍️</div><div class="w-title">Copywriting estratégico</div><p class="w-desc">Textos que hablan el idioma de tu audiencia. Copy que genera interacción, construye comunidad y refuerza tu posicionamiento.</p></div>
+        <div class="w-card"><div class="w-icon wi-azul">🎨</div><div class="w-title">Diseño visual de marca</div><p class="w-desc">Piezas gráficas, carousels, stories y reels con identidad visual coherente que hace reconocible tu marca a primera vista.</p></div>
+        <div class="w-card"><div class="w-icon wi-mrd">💬</div><div class="w-title">Community management</div><p class="w-desc">Respondemos comentarios, DMs y menciones con la voz de tu marca. Construimos relaciones reales con tu audiencia.</p></div>
+        <div class="w-card"><div class="w-icon wi-grn">📊</div><div class="w-title">Reportes mensuales</div><p class="w-desc">Análisis de métricas que importan: alcance, engagement, crecimiento y conversiones. Sin tecnicismos, con conclusiones claras.</p></div>
+        <div class="w-card"><div class="w-icon wi-amr">🚀</div><div class="w-title">Estrategia de crecimiento</div><p class="w-desc">Tácticas orgánicas para hacer crecer tu comunidad de forma auténtica: colaboraciones, hashtags, tendencias y más.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="inner">
+      <div class="section-tag-color tc-naranja">Nuestro proceso</div>
+      <h2 class="section-title-inv">Cómo gestionamos<br>tus redes.</h2>
+      <div class="ip-steps" style="margin-top:3rem">
+        <div class="ip-step" style="border-color:rgba(255,255,255,.08)">
+          <div class="ip-step-num">01</div>
+          <div><div class="ip-step-title" style="color:var(--blanco)">Auditoría y diagnóstico</div><p class="ip-step-desc" style="color:rgba(255,255,255,.35)">Analizamos tu estado actual en redes: qué funciona, qué no, y dónde están las oportunidades. Revisamos competencia, audiencia y tendencias del sector.</p><div class="ip-step-tags"><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Análisis de cuenta</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Benchmarking</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Definición de audiencia</span></div></div>
+        </div>
+        <div class="ip-step" style="border-color:rgba(255,255,255,.08)">
+          <div class="ip-step-num">02</div>
+          <div><div class="ip-step-title" style="color:var(--blanco)">Estrategia y planificación</div><p class="ip-step-desc" style="color:rgba(255,255,255,.35)">Definimos la línea editorial, los pilares de contenido, el tono de comunicación y el calendario mensual. Todo alineado a tus objetivos comerciales.</p><div class="ip-step-tags"><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Editorial</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Pilares de contenido</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Calendario</span></div></div>
+        </div>
+        <div class="ip-step" style="border-color:rgba(255,255,255,.08)">
+          <div class="ip-step-num">03</div>
+          <div><div class="ip-step-title" style="color:var(--blanco)">Producción y publicación</div><p class="ip-step-desc" style="color:rgba(255,255,255,.35)">Creamos cada pieza de contenido — desde el diseño hasta el copy — y la publicamos en el momento óptimo. Gestionamos stories, reels, carousels y todo el ecosistema.</p><div class="ip-step-tags"><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Diseño</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Copy</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Publicación</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Community</span></div></div>
+        </div>
+        <div class="ip-step" style="border-color:transparent">
+          <div class="ip-step-num">04</div>
+          <div><div class="ip-step-title" style="color:var(--blanco)">Medición y mejora</div><p class="ip-step-desc" style="color:rgba(255,255,255,.35)">Cada mes revisamos los resultados, identificamos qué generó más impacto y ajustamos la estrategia para el siguiente período. Siempre mejorando.</p><div class="ip-step-tags"><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Analítica</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Reporte mensual</span><span class="ip-tag" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.1)">Optimización</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color tc-naranja">Resultados</div>
+      <h2 class="section-title">Lo que puedes esperar<br>trabajando con nosotros.</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem">
+        <div style="background:var(--gris);border-radius:16px;padding:2rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.5rem;letter-spacing:-.03em;background:linear-gradient(135deg,var(--naranja),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.4rem">+340%</div><div style="font-size:.75rem;color:var(--gris2);font-weight:300;line-height:1.5">Alcance promedio en 3 meses</div></div>
+        <div style="background:var(--gris);border-radius:16px;padding:2rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.5rem;letter-spacing:-.03em;background:linear-gradient(135deg,var(--naranja),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.4rem">60+</div><div style="font-size:.75rem;color:var(--gris2);font-weight:300;line-height:1.5">Piezas de contenido al mes</div></div>
+        <div style="background:var(--gris);border-radius:16px;padding:2rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.5rem;letter-spacing:-.03em;background:linear-gradient(135deg,var(--naranja),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.4rem">5x</div><div style="font-size:.75rem;color:var(--gris2);font-weight:300;line-height:1.5">Más engagement que el promedio del sector</div></div>
+        <div style="background:var(--gris);border-radius:16px;padding:2rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.5rem;letter-spacing:-.03em;background:linear-gradient(135deg,var(--naranja),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.4rem">24h</div><div style="font-size:.75rem;color:var(--gris2);font-weight:300;line-height:1.5">Tiempo de respuesta en comunidad</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-inner">
+    <h2>¿Quieres que tus redes<br><span class="grad-text">trabajen para tu negocio?</span></h2>
+    <p>Hablemos sobre tu marca y diseñamos la estrategia de redes sociales que necesitas.</p>
+    <button class="btn-grad" onclick="showPage('contacto')" style="position:relative;z-index:1">Quiero gestionar mis redes →</button>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('servicios')">Todos los servicios</a></li><li><a onclick="showPage('publicidad')">Publicidad digital</a></li><li><a onclick="showPage('contacto')">Contacto</a></li></ul><div class="footer-copy">© 2025 Conect 2b</div></div></footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: PUBLICIDAD DIGITAL
+════════════════════════════════ -->
+<div id="page-publicidad" class="page">
+  <div class="page-hero">
+    <div class="ph-deco ph-deco-2"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('servicios')">← Volver a servicios</button>
+      <span class="ph-tag tc-azul">02 — Publicidad digital</span>
+      <h1 class="ph-h1">Inversión que <span style="background:linear-gradient(90deg,var(--azul),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">se convierte en ventas.</span></h1>
+      <p class="ph-sub">Diseñamos y gestionamos campañas de publicidad paga en las plataformas donde está tu audiencia. Cada sol invertido trabaja para llevar a las personas correctas a tu negocio.</p>
+      <div class="ph-pills"><span class="ph-pill">Meta Ads</span><span class="ph-pill">Google Ads</span><span class="ph-pill">TikTok Ads</span><span class="ph-pill">Instagram Ads</span><span class="ph-pill">YouTube Ads</span><span class="ph-pill">Retargeting</span></div>
+    </div>
+  </div>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color tc-azul">¿Qué incluye?</div>
+      <h2 class="section-title">Campañas completas,<br>de la idea a la conversión.</h2>
+      <div class="what-grid">
+        <div class="w-card"><div class="w-icon wi-azul">🎯</div><div class="w-title">Segmentación precisa</div><p class="w-desc">Identificamos y alcanzamos a tu audiencia ideal por intereses, comportamiento, demografía y ubicación. Nada de presupuesto desperdiciado.</p></div>
+        <div class="w-card"><div class="w-icon wi-mag">🖼️</div><div class="w-title">Creatividades publicitarias</div><p class="w-desc">Diseño de anuncios visuales y copy que capturan la atención y generan acción. Videos, imágenes y carousels optimizados para cada plataforma.</p></div>
+        <div class="w-card"><div class="w-icon wi-nar">⚙️</div><div class="w-title">Setup y configuración</div><p class="w-desc">Instalación del píxel, configuración de eventos de conversión y estructura de campañas profesional desde el primer día.</p></div>
+        <div class="w-card"><div class="w-icon wi-mrd">🔁</div><div class="w-title">Retargeting estratégico</div><p class="w-desc">Impactamos nuevamente a las personas que ya mostraron interés en tu marca. Recuperamos oportunidades perdidas y aumentamos la conversión.</p></div>
+        <div class="w-card"><div class="w-icon wi-grn">📈</div><div class="w-title">Optimización continua</div><p class="w-desc">Monitoreamos el rendimiento diariamente y ajustamos pujas, audiencias y creatividades para maximizar el retorno de cada sol invertido.</p></div>
+        <div class="w-card"><div class="w-icon wi-amr">📋</div><div class="w-title">Reportes de rendimiento</div><p class="w-desc">Informes claros con las métricas que realmente importan: costo por resultado, ROAS, CPM, CTR y proyecciones de crecimiento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="inner">
+      <div class="section-tag-color tc-azul">Plataformas</div>
+      <h2 class="section-title-inv">Donde esté tu audiencia,<br>ahí estaremos.</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem">
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--blanco);margin-bottom:.5rem">Meta Ads</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);font-weight:300;line-height:1.7">Facebook e Instagram. La plataforma con mayor capacidad de segmentación. Ideal para awareness, consideración y conversión.</p></div>
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--blanco);margin-bottom:.5rem">Google Ads</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);font-weight:300;line-height:1.7">Búsqueda, display y YouTube. Capturamos la intención de compra en el momento exacto en que tus clientes te están buscando.</p></div>
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--blanco);margin-bottom:.5rem">TikTok Ads</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);font-weight:300;line-height:1.7">La plataforma de mayor crecimiento. Ideal para marcas que quieren conectar con audiencias jóvenes y generar viralizad estratégica.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div class="why-grid">
+        <div class="why-card"><div class="why-icon">🏆</div><div><div class="why-title">Enfoque en ROAS</div><div class="why-desc">Cada campaña está optimizada para maximizar el retorno sobre la inversión publicitaria. Tu presupuesto es sagrado.</div></div></div>
+        <div class="why-card"><div class="why-icon">🔬</div><div><div class="why-title">Tests A/B constantes</div><div class="why-desc">Siempre estamos probando variaciones de creatividad, copy y audiencias para descubrir qué funciona mejor para tu negocio.</div></div></div>
+        <div class="why-card"><div class="why-icon">💡</div><div><div class="why-title">Creatividades nativas</div><div class="why-desc">Anuncios que se sienten como contenido orgánico de cada plataforma, generando mayor engagement y menor costo por resultado.</div></div></div>
+        <div class="why-card"><div class="why-icon">📞</div><div><div class="why-title">Comunicación directa</div><div class="why-desc">Acceso directo a tu gestor de campañas. Sin intermediarios, sin burocracia. Respuestas en menos de 24 horas siempre.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-inner">
+    <h2>¿Quieres que tu<br><span class="grad-text">inversión genere ventas reales?</span></h2>
+    <p>Analizamos tu situación actual y te proponemos una estrategia de publicidad digital a medida.</p>
+    <button class="btn-grad" onclick="showPage('contacto')" style="position:relative;z-index:1">Quiero anunciarme bien →</button>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('servicios')">Todos los servicios</a></li><li><a onclick="showPage('redes')">Redes sociales</a></li><li><a onclick="showPage('contacto')">Contacto</a></li></ul><div class="footer-copy">© 2025 Conect 2b</div></div></footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: EXPERIENCIAS DE MARCA
+════════════════════════════════ -->
+<div id="page-marca" class="page">
+  <div class="page-hero">
+    <div class="ph-deco ph-deco-4" style="background:radial-gradient(circle,rgba(33,0,77,.6) 0%,transparent 70%)"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('servicios')">← Volver a servicios</button>
+      <span class="ph-tag" style="background:linear-gradient(90deg,var(--morado),var(--azul));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">03 — Experiencias de marca</span>
+      <h1 class="ph-h1">Una marca que se <span style="background:linear-gradient(90deg,var(--morado),var(--azul),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">siente, recuerda</span><br>y prefiere.</h1>
+      <p class="ph-sub">No construimos logos. Construimos sistemas de identidad completos que hacen que tu marca sea reconocida a primera vista y recordada para siempre en la mente de tu audiencia.</p>
+      <div class="ph-pills"><span class="ph-pill">Identidad visual</span><span class="ph-pill">Branding</span><span class="ph-pill">Estrategia de marca</span><span class="ph-pill">Manual de marca</span><span class="ph-pill">Posicionamiento</span></div>
+    </div>
+  </div>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color" style="color:var(--morado)">¿Qué incluye?</div>
+      <h2 class="section-title">Del concepto al sistema<br>de identidad completo.</h2>
+      <div class="what-grid">
+        <div class="w-card"><div class="w-icon wi-mrd">🔤</div><div class="w-title">Naming y concepto</div><p class="w-desc">El nombre correcto abre puertas. Desarrollamos nombres de marca memorables, con disponibilidad legal y potencial de posicionamiento.</p></div>
+        <div class="w-card"><div class="w-icon wi-azul">🎨</div><div class="w-title">Identidad visual</div><p class="w-desc">Logotipo, paleta de colores, tipografías y sistema gráfico completo. Una identidad que comunica quiénes son y por qué elegirte.</p></div>
+        <div class="w-card"><div class="w-icon wi-mag">📖</div><div class="w-title">Manual de marca</div><p class="w-desc">Documento completo con todas las reglas de uso de la marca. El manual que garantiza coherencia en cada punto de contacto.</p></div>
+        <div class="w-card"><div class="w-icon wi-nar">✍️</div><div class="w-title">Tono de voz</div><p class="w-desc">Definimos cómo habla tu marca: su personalidad, sus palabras clave y la forma en que se expresa en cada canal y situación.</p></div>
+        <div class="w-card"><div class="w-icon wi-grn">📍</div><div class="w-title">Posicionamiento</div><p class="w-desc">Estrategia de posicionamiento que diferencia tu marca de la competencia y la ubica en la mente de tu audiencia objetivo.</p></div>
+        <div class="w-card"><div class="w-icon wi-amr">📦</div><div class="w-title">Aplicaciones de marca</div><p class="w-desc">Tarjetas, papelería, packaging, templates digitales y todo lo que necesitas para presentarte de forma profesional y coherente.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:linear-gradient(135deg,var(--morado) 0%,#2a006a 50%,var(--azul) 100%);padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color" style="color:rgba(255,255,255,.5)">Por qué importa</div>
+      <h2 class="section-title-inv">Tu marca es lo primero<br>que ven. Que valga la pena.</h2>
+      <p class="section-sub-inv">Una marca fuerte no es un lujo. Es la diferencia entre ser recordado o ser ignorado.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:2rem">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2rem;letter-spacing:-.03em;color:var(--blanco);margin-bottom:.4rem">7 seg</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);font-weight:300;line-height:1.5">es lo que tarda alguien en formarse una primera impresión de tu marca</div></div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2rem;letter-spacing:-.03em;color:var(--blanco);margin-bottom:.4rem">+33%</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);font-weight:300;line-height:1.5">más ingresos tienen las marcas con presentación visual consistente</div></div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2rem;letter-spacing:-.03em;color:var(--blanco);margin-bottom:.4rem">80%</div><div style="font-size:.78rem;color:rgba(255,255,255,.4);font-weight:300;line-height:1.5">de los consumidores eligen marcas que perciben como auténticas</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-inner">
+    <h2>¿Es hora de construir<br><span class="grad-text">una marca que se quede?</span></h2>
+    <p>Desarrollamos tu identidad de marca de forma estratégica, creativa y con una visión a largo plazo.</p>
+    <button class="btn-grad" onclick="showPage('contacto')" style="position:relative;z-index:1">Quiero construir mi marca →</button>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('servicios')">Todos los servicios</a></li><li><a onclick="showPage('contenido')">Contenido de valor</a></li><li><a onclick="showPage('contacto')">Contacto</a></li></ul><div class="footer-copy">© 2025 Conect 2b</div></div></footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: CONTENIDO DE VALOR
+════════════════════════════════ -->
+<div id="page-contenido" class="page">
+  <div class="page-hero">
+    <div class="ph-deco ph-deco-1" style="background:radial-gradient(circle,rgba(254,11,143,.2) 0%,transparent 70%)"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('servicios')">← Volver a servicios</button>
+      <span class="ph-tag tc-magenta">04 — Contenido de valor</span>
+      <h1 class="ph-h1">Contenido que <span class="grad-text">educa, conecta</span><br>y convierte.</h1>
+      <p class="ph-sub">Producimos el contenido que tu marca necesita para ser relevante, útil y memorable. Desde el concepto hasta la pieza final, con una producción que refleja la calidad de lo que ofreces.</p>
+      <div class="ph-pills"><span class="ph-pill">Video</span><span class="ph-pill">Fotografía</span><span class="ph-pill">Diseño gráfico</span><span class="ph-pill">Copywriting</span><span class="ph-pill">Reels</span><span class="ph-pill">Podcast</span></div>
+    </div>
+  </div>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color tc-magenta">¿Qué producimos?</div>
+      <h2 class="section-title">Contenido de alta calidad<br>para cada canal y formato.</h2>
+      <div class="what-grid">
+        <div class="w-card"><div class="w-icon wi-mag">🎬</div><div class="w-title">Producción de video</div><p class="w-desc">Reels, shorts, videos institucionales, testimoniales y contenido educativo. Producción completa con dirección creativa, filmación y edición.</p></div>
+        <div class="w-card"><div class="w-icon wi-nar">📸</div><div class="w-title">Fotografía de marca</div><p class="w-desc">Sesiones fotográficas para producto, equipo y lifestyle. Imágenes que comunican la calidad y personalidad de tu marca en cada plataforma.</p></div>
+        <div class="w-card"><div class="w-icon wi-azul">🖼️</div><div class="w-title">Diseño gráfico</div><p class="w-desc">Carousels, infografías, piezas para stories, banners publicitarios y todo el material visual que tu marca necesita para impactar visualmente.</p></div>
+        <div class="w-card"><div class="w-icon wi-mrd">✍️</div><div class="w-title">Copywriting de contenido</div><p class="w-desc">Artículos de blog, newsletters, guiones para video, descripciones de producto y cualquier texto que construya autoridad y conecte con tu audiencia.</p></div>
+        <div class="w-card"><div class="w-icon wi-grn">📱</div><div class="w-title">Contenido para redes</div><p class="w-desc">Piezas optimizadas para Instagram, TikTok, LinkedIn y Facebook. Cada plataforma tiene su lenguaje y nosotros lo dominamos.</p></div>
+        <div class="w-card"><div class="w-icon wi-amr">🎙️</div><div class="w-title">Contenido educativo</div><p class="w-desc">Webinars, tutoriales, guías en video y contenido que posiciona a tu marca como referente en su categoría y genera confianza genuina.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section">
+    <div class="inner">
+      <div class="section-tag-color tc-magenta">Nuestra filosofía</div>
+      <h2 class="section-title-inv">El contenido no es<br>decoración. Es estrategia.</h2>
+      <p class="section-sub-inv">Cada pieza que creamos tiene un objetivo claro, una audiencia definida y un call to action pensado para generar resultados.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:var(--blanco);margin-bottom:.5rem">Contenido que educa</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.7;font-weight:300">Resuelve las dudas de tu audiencia, construye autoridad y te posiciona como el experto de referencia en tu categoría.</p></div>
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:var(--blanco);margin-bottom:.5rem">Contenido que conecta</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.7;font-weight:300">Historias reales, behind the scenes y contenido humano que hace que tu audiencia se identifique con tu marca y la haga propia.</p></div>
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:var(--blanco);margin-bottom:.5rem">Contenido que convierte</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.7;font-weight:300">Demostraciones, testimoniales y contenido orientado a la venta que lleva a tu audiencia del interés a la acción concreta.</p></div>
+        <div class="dark-card"><div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:var(--blanco);margin-bottom:.5rem">Contenido que posiciona</div><p style="font-size:.82rem;color:rgba(255,255,255,.35);line-height:1.7;font-weight:300">Opinionleadership, tendencias y contenido de valor que consolida a tu marca como referente inevitable en su industria.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-inner">
+    <h2>¿Tu marca merece<br><span class="grad-text">contenido que la eleve?</span></h2>
+    <p>Diseñamos tu estrategia de contenido y empezamos a producir piezas que generan impacto real.</p>
+    <button class="btn-grad" onclick="showPage('contacto')" style="position:relative;z-index:1">Quiero contenido de calidad →</button>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('servicios')">Todos los servicios</a></li><li><a onclick="showPage('marca')">Experiencias de marca</a></li><li><a onclick="showPage('contacto')">Contacto</a></li></ul><div class="footer-copy">© 2025 Conect 2b</div></div></footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: NOSOTROS
+════════════════════════════════ -->
+<div id="page-nosotros" class="page">
+  <div class="page-hero">
+    <div class="ph-deco" style="background:radial-gradient(circle,rgba(24,1,245,.2) 0%,transparent 70%)"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('home')">← Volver al inicio</button>
+      <span class="ph-tag tc-grad">Nuestra historia</span>
+      <h1 class="ph-h1">Más que una agencia.<br><span class="grad-text">Un sistema de crecimiento.</span></h1>
+      <p class="ph-sub">Conect 2b nació de una convicción simple: que las marcas peruanas merecen una agencia que piense estratégicamente y ejecute sin excusas. Que trate el presupuesto de cada cliente como si fuera el propio.</p>
+    </div>
+  </div>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
+        <div>
+          <div class="section-tag-color tc-azul">Quiénes somos</div>
+          <h2 class="section-title">Conectamos marcas con personas.</h2>
+          <p style="font-size:.93rem;color:var(--gris2);font-weight:300;line-height:1.8;margin-bottom:1rem">En Conect 2b, entendemos que el marketing digital no se trata de publicar por publicar. Se trata de construir sistemas digitales con intencionalidad, donde cada acción tiene un propósito claro: generar crecimiento real y sostenible.</p>
+          <p style="font-size:.93rem;color:var(--gris2);font-weight:300;line-height:1.8;margin-bottom:1rem">Trabajamos con emprendedores y PYMES que quieren dejar de ser invisibles y empezar a ser relevantes. Somos el equipo que piensa, crea y ejecuta junto a ellos.</p>
+          <p style="font-size:.93rem;color:var(--gris2);font-weight:300;line-height:1.8">Somos Lima, Perú. Y trabajamos para que las marcas peruanas compitan con fuerza en el entorno digital.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div style="background:var(--gris);border-radius:16px;padding:1.8rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.4rem;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem">20+</div><div style="font-size:.76rem;color:var(--gris2);font-weight:300">marcas que confían en nosotros</div></div>
+          <div style="background:var(--gris);border-radius:16px;padding:1.8rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.4rem;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem">4</div><div style="font-size:.76rem;color:var(--gris2);font-weight:300">pilares de servicio integrados</div></div>
+          <div style="background:var(--gris);border-radius:16px;padding:1.8rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.4rem;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem">100%</div><div style="font-size:.76rem;color:var(--gris2);font-weight:300">orientados a resultados medibles</div></div>
+          <div style="background:var(--gris);border-radius:16px;padding:1.8rem;text-align:center"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:2.4rem;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.35rem">Lima</div><div style="font-size:.76rem;color:var(--gris2);font-weight:300">con alcance en todo Perú y LATAM</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--negro);padding:7rem 0">
+    <div class="inner">
+      <div class="section-tag-color tc-grad">Nuestros valores</div>
+      <h2 class="section-title-inv">Lo que nos define<br>como equipo.</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem">
+        <div style="background:rgba(246,76,26,.06);border:1px solid rgba(246,76,26,.18);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.05rem;color:var(--blanco);margin-bottom:.5rem">Estrategia antes que tendencia.</div><p style="font-size:.83rem;color:rgba(255,255,255,.38);line-height:1.72;font-weight:300">Nos negamos a publicar por publicar. Cada acción responde a un objetivo de negocio real, medible y trazable. Las tendencias son insumos, no el camino.</p></div>
+        <div style="background:rgba(254,11,143,.06);border:1px solid rgba(254,11,143,.18);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.05rem;color:var(--blanco);margin-bottom:.5rem">Creatividad con propósito.</div><p style="font-size:.83rem;color:rgba(255,255,255,.38);line-height:1.72;font-weight:300">Somos creativos, sí. Pero la creatividad al servicio de los resultados. Cada idea que ejecutamos tiene una razón y un indicador de éxito.</p></div>
+        <div style="background:rgba(24,1,245,.06);border:1px solid rgba(24,1,245,.18);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.05rem;color:var(--blanco);margin-bottom:.5rem">Resultados medibles.</div><p style="font-size:.83rem;color:rgba(255,255,255,.38);line-height:1.72;font-weight:300">El trabajo habla por sí solo. Entregamos reportes claros con métricas que importan — no métricas de vanidad que no se convierten en negocio.</p></div>
+        <div style="background:rgba(33,0,77,.18);border:1px solid rgba(33,0,77,.35);border-radius:16px;padding:2rem"><div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.05rem;color:var(--blanco);margin-bottom:.5rem">Evolución constante.</div><p style="font-size:.83rem;color:rgba(255,255,255,.38);line-height:1.72;font-weight:300">El mundo digital no para. Nosotros tampoco. Nos actualizamos permanentemente para llevar las estrategias más efectivas a cada cliente.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:7rem 0">
+    <div class="inner">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem">
+        <div style="background:var(--gris);border-radius:20px;padding:3rem">
+          <div class="section-tag-color tc-azul" style="margin-bottom:.8rem">Visión</div>
+          <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.02em;color:var(--negro);margin-bottom:.9rem;line-height:1.15">Convertirnos en el aliado estratégico de referencia para negocios que quieren crecer en digital.</h3>
+          <p style="font-size:.87rem;color:var(--gris2);line-height:1.8;font-weight:300">Ser reconocidos en Perú y LATAM como la agencia que realmente transforma visibilidad en oportunidades de negocio reales y sostenibles.</p>
+        </div>
+        <div style="background:linear-gradient(135deg,var(--morado),var(--azul));border-radius:20px;padding:3rem">
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.8rem">Misión</div>
+          <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:-.02em;color:var(--blanco);margin-bottom:.9rem;line-height:1.15">Ayudar a emprendedores y empresas a conectar sus marcas con clientes reales.</h3>
+          <p style="font-size:.87rem;color:rgba(255,255,255,.45);line-height:1.8;font-weight:300">A través de estrategias digitales creativas, medibles y orientadas a resultados — transformando ideas en crecimiento sostenible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-inner">
+    <h2>¿Quieres que Conect 2b<br><span class="grad-text">sea tu aliado estratégico?</span></h2>
+    <p>Hablemos sobre tu marca, tus objetivos y cómo podemos ayudarte a lograrlos.</p>
+    <button class="btn-grad btn-grad-lg" onclick="showPage('contacto')" style="position:relative;z-index:1">Hablemos →</button>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('home')">Inicio</a></li><li><a onclick="showPage('servicios')">Servicios</a></li><li><a onclick="showPage('contacto')">Contacto</a></li></ul><div class="footer-copy">© 2025 Conect 2b</div></div></footer>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE: CONTACTO
+════════════════════════════════ -->
+<div id="page-contacto" class="page">
+  <div class="page-hero" style="min-height:auto;padding:5rem 4rem 4rem">
+    <div class="ph-deco ph-deco-1"></div>
+    <div class="inner">
+      <button class="back-btn" onclick="showPage('home')">← Volver al inicio</button>
+      <span class="ph-tag tc-grad">Hablemos</span>
+      <h1 class="ph-h1" style="font-size:clamp(2.2rem,4.5vw,3.4rem)">El primer paso para<br><span class="grad-text">crecer empieza aquí.</span></h1>
+      <p class="ph-sub" style="margin-bottom:0">Cuéntanos sobre tu marca y te contactamos en menos de 24 horas con una propuesta inicial.</p>
+    </div>
+  </div>
+
+  <section style="padding:4rem 0 7rem">
+    <div class="inner">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:flex-start">
+
+        <!-- CONTACT INFO -->
+        <div>
+          <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;color:var(--negro);margin-bottom:2rem">Encuéntranos en</div>
+          <div style="display:flex;flex-direction:column;gap:1.5rem">
+            <div style="display:flex;gap:1rem;align-items:flex-start">
+              <div style="width:42px;height:42px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📱</div>
+              <div><div style="font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris2);margin-bottom:.2rem">WhatsApp</div><div style="font-size:1rem;font-weight:700;color:var(--negro)">960 780 540</div></div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:flex-start">
+              <div style="width:42px;height:42px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">✉️</div>
+              <div><div style="font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris2);margin-bottom:.2rem">Email</div><div style="font-size:.95rem;font-weight:400;color:var(--negro)">conect2bagencia@gmail.com</div></div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:flex-start">
+              <div style="width:42px;height:42px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📸</div>
+              <div><div style="font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris2);margin-bottom:.2rem">Instagram</div><div style="font-size:.95rem;font-weight:400;color:var(--negro)">@Conect 2b.agencia</div></div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:flex-start">
+              <div style="width:42px;height:42px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">🌐</div>
+              <div><div style="font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris2);margin-bottom:.2rem">Web</div><div style="font-size:.95rem;font-weight:400;color:var(--negro)">www.conect2b.com</div></div>
+            </div>
+            <div style="display:flex;gap:1rem;align-items:flex-start">
+              <div style="width:42px;height:42px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📍</div>
+              <div><div style="font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gris2);margin-bottom:.2rem">Ubicación</div><div style="font-size:.95rem;font-weight:400;color:var(--negro)">Lima, Perú</div></div>
+            </div>
+          </div>
+
+          <div style="margin-top:3rem;padding:2rem;background:var(--gris);border-radius:16px">
+            <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;color:var(--negro);margin-bottom:.5rem">Tiempo de respuesta</div>
+            <p style="font-size:.82rem;color:var(--gris2);font-weight:300;line-height:1.65">Respondemos todos los mensajes en <strong style="color:var(--negro);font-weight:700">menos de 24 horas</strong> hábiles. Si es urgente, escríbenos directo al WhatsApp.</p>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div style="background:var(--gris);border-radius:24px;padding:3rem">
+          <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:-.02em;color:var(--negro);margin-bottom:.5rem">Cuéntanos sobre tu proyecto</div>
+          <p style="font-size:.83rem;color:var(--gris2);font-weight:300;margin-bottom:2rem">Completa el formulario y nos ponemos en contacto contigo para diseñar una propuesta a medida.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+            <div><label style="display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);margin-bottom:.4rem">Nombre</label><input type="text" placeholder="Tu nombre" style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:.88rem;background:var(--blanco);color:var(--negro);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--magenta)'" onblur="this.style.borderColor='rgba(0,0,0,.1)'"></div>
+            <div><label style="display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);margin-bottom:.4rem">Empresa / Marca</label><input type="text" placeholder="Nombre de tu marca" style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:.88rem;background:var(--blanco);color:var(--negro);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--magenta)'" onblur="this.style.borderColor='rgba(0,0,0,.1)'"></div>
+          </div>
+          <div style="margin-bottom:1rem"><label style="display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);margin-bottom:.4rem">Email</label><input type="email" placeholder="tu@email.com" style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:.88rem;background:var(--blanco);color:var(--negro);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--magenta)'" onblur="this.style.borderColor='rgba(0,0,0,.1)'"></div>
+          <div style="margin-bottom:1rem"><label style="display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);margin-bottom:.4rem">WhatsApp</label><input type="tel" placeholder="+51 999 999 999" style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:.88rem;background:var(--blanco);color:var(--negro);outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--magenta)'" onblur="this.style.borderColor='rgba(0,0,0,.1)'"></div>
+          <div style="margin-bottom:1rem"><label style="display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);margin-bottom:.4rem">¿Qué servicio te interesa?</label><select style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:.88rem;background:var(--blanco);color:var(--negro);outline:none;appearance:none;cursor:pointer;transition:border-color .2s" onfocus="this.style.borderColor='var(--magenta)'" onblur="this.style.borderColor='rgba(0,0,0,.1)'"><option value="">Selecciona un servicio</option><option>Gestión de redes sociales</option><option>Publicidad digital</option><option>Experiencias de marca</option><option>Producción de contenido de valor</option><option>Todos los servicios (paquete integral)</option></select></div>
+          <div style="margin-bottom:1.8rem"><label style="display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);margin-bottom:.4rem">Cuéntanos sobre tu proyecto</label><textarea rows="4" placeholder="¿Qué necesita tu marca? ¿Cuáles son tus objetivos? ¿En qué etapa está tu negocio?" style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(0,0,0,.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:.88rem;background:var(--blanco);color:var(--negro);outline:none;resize:vertical;transition:border-color .2s" onfocus="this.style.borderColor='var(--magenta)'" onblur="this.style.borderColor='rgba(0,0,0,.1)'"></textarea></div>
+          <button class="btn-grad" style="width:100%;padding:1rem;font-size:.95rem;border-radius:12px" onclick="handleFormSubmit(this)">Enviar mensaje →</button>
+          <p style="font-size:.72rem;color:var(--gris2);text-align:center;margin-top:1rem;font-weight:300">Te respondemos en menos de 24 horas hábiles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="footer-inner"><div><div class="footer-logo">conect <span>2b</span></div><span class="footer-sub-txt">Agencia Digital</span></div><ul class="footer-links"><li><a onclick="showPage('home')">Inicio</a></li><li><a onclick="showPage('servicios')">Servicios</a></li><li><a onclick="showPage('nosotros')">Nosotros</a></li></ul><div class="footer-copy">© 2025 Conect 2b — Lima, Perú</div></div></footer>
+</div>
+
+<script>
+// ─── NAVIGATION ───
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) {
+    page.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Update nav active link
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
+  const navMap = { home: 'nav-home', servicios: 'nav-servicios', nosotros: 'nav-nosotros' };
+  if (navMap[id]) document.getElementById(navMap[id])?.classList.add('active-link');
+
+  // Trigger fade-ins
+  setTimeout(triggerFadeIns, 100);
+}
+
+// ─── SCROLL ANIMATIONS ───
+function triggerFadeIns() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.page.active .fade-in').forEach(el => observer.observe(el));
+}
+
+// ─── FORM ───
+function handleFormSubmit(btn) {
+  btn.textContent = '✓ Mensaje enviado — te contactamos pronto!';
+  btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+  btn.disabled = true;
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => triggerFadeIns());
+triggerFadeIns();
+</script>
+</body>
+</html>
